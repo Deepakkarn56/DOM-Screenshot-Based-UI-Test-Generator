@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM + Screenshot UI Test Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">AI Test Generator</span>
+      </div>
+      <p class="tagline">Paste DOM → Upload Screenshot → Get Playwright Tests</p>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="steps-bar">
+      <div class="step" id="step1"><span class="step-num">1</span><span class="step-label">Add DOM</span></div>
+      <div class="step-arrow">→</div>
+      <div class="step" id="step2"><span class="step-num">2</span><span class="step-label">Screenshot</span></div>
+      <div class="step-arrow">→</div>
+      <div class="step" id="step3"><span class="step-num">3</span><span class="step-label">Generate</span></div>
+      <div class="step-arrow">→</div>
+      <div class="step" id="step4"><span class="step-num">4</span><span class="step-label">Copy Tests</span></div>
+    </div>
+
+    <div class="layout">
+
+      <section class="panel input-panel">
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">DOM Structure</span>
+            <span class="badge">Required</span>
+          </div>
+          <p class="card-hint">Open DevTools → right-click element → Copy → Copy outerHTML</p>
+          <textarea id="dom-input" placeholder='<form id="login-form">
+  <input type="text" id="username" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button type="submit" id="login-btn">Sign in</button>
+  <span class="error-msg" id="error"></span>
+</form>'></textarea>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Screenshot</span>
+            <span class="badge badge-optional">Optional</span>
+          </div>
+          <p class="card-hint">Helps Claude understand visual layout and UI context</p>
+          <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+            <div class="upload-icon">📸</div>
+            <p class="upload-text">Click to upload screenshot</p>
+            <p class="upload-sub">PNG or JPG supported</p>
+            <img id="preview-img" class="preview-img" alt="Screenshot preview" style="display:none" />
+          </div>
+          <input type="file" id="file-input" accept="image/*" style="display:none" />
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Test Configuration</span>
+          </div>
+          <label class="field-label">Test focus</label>
+          <div class="test-types" id="test-types">
+            <button class="type-btn selected" data-val="form validation">Form validation</button>
+            <button class="type-btn" data-val="navigation flow">Navigation flow</button>
+            <button class="type-btn" data-val="authentication">Auth flow</button>
+            <button class="type-btn" data-val="UI assertions">UI assertions</button>
+            <button class="type-btn" data-val="accessibility">Accessibility</button>
+          </div>
+          <label class="field-label" style="margin-top:1rem;">Additional context <span class="optional-text">(optional)</span></label>
+          <input type="text" id="extra-context" class="text-input" placeholder="e.g. test invalid email, empty fields, valid login..." />
+        </div>
+
+        <button class="generate-btn" id="generate-btn" onclick="generateTests()">
+          ✨ Generate Playwright Tests
+        </button>
+
+      </section>
+
+      <section class="panel output-panel">
+
+        <div class="output-placeholder" id="output-placeholder">
+          <div class="placeholder-icon">🎯</div>
+          <p class="placeholder-title">Generated tests will appear here</p>
+          <p class="placeholder-sub">Paste your DOM and click Generate to get started</p>
+        </div>
+
+        <div class="output-card" id="output-card" style="display:none">
+          <div class="output-header">
+            <span class="card-title">Generated Playwright Tests</span>
+            <div class="output-actions">
+              <button class="action-btn" onclick="copyCode()" id="copy-btn">📋 Copy</button>
+              <button class="action-btn" onclick="downloadCode()">⬇ Download</button>
+            </div>
+          </div>
+          <div class="loading-bar" id="loading-bar" style="display:none">
+            <div class="loading-bar-inner"></div>
+          </div>
+          <pre class="output-code" id="output-code"></pre>
+          <p class="output-note">⚠ Review selectors before running. Verify they match your actual page.</p>
+        </div>
+
+        <div class="error-box" id="error-box" style="display:none"></div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Built with Claude API + Playwright &nbsp;|&nbsp;
+      <a href="https://github.com/Deepakkarn56/dom-screenshot-ui-test-generator" target="_blank">GitHub ↗</a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
