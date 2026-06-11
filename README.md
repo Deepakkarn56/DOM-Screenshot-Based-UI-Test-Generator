@@ -8,7 +8,7 @@ AI-powered tool that scans any webpage's DOM,  analyzes UI elements, and auto-ge
 ![Playwright](https://img.shields.io/badge/Output-Playwright%20JS-green?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 
----
+
 
 ## 🎯 What It Does
 
