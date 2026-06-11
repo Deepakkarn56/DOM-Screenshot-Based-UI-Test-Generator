@@ -139,7 +139,7 @@ test.describe('Login Form - Authentication Tests', () => {
 ## 👨‍💻 Author
 
 **Deepak Kumar** — QA Automation Engineer  
-📂 [GitHub Portfolio](https://github.com/Deepakkarn56/AI-Automation-Tester-Journey)
+📂 [GitHub Portfolio](https://github.com/Deepakkarn56)
 
 ---
 
